@@ -1,6 +1,10 @@
 // bower:scss
 // endbower
 
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
 .browserupgrade {
 	margin: 0.2em 0;
 	background: #ccc;
@@ -14,3 +18,76 @@ body {
 	color: #333;
 }
 
+.game-board {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 900px;
+	margin: 50px auto 0;
+}
+
+.card-wrapper {
+	position: relative;
+	width: calc(25% - 10px);
+	padding-bottom: calc(25% - 10px);
+	margin: 5px;
+	perspective: 800px;
+}
+
+.card {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	border-radius: 5px;
+	transition: all, .3s;
+	transform-style: preserve-3d;
+
+	&:hover {
+		cursor: pointer;
+		transform: rotateY( 15deg );
+	}
+
+	svg path {
+		fill: white;
+	}
+}
+
+.card__front,
+.card__back {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	backface-visibility: hidden;
+}
+
+.card__front {
+	background-color: gray;
+}
+
+.card__back {
+	background-color: lightgray;
+	transform: rotateY( 180deg );
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color, .3s;
+	transition-delay: 1s;
+}
+
+.card--flipped,
+.card--matched {
+	transform: rotateY( 180deg );
+
+	&:hover {
+		transform: rotateY( 180deg );
+	}
+}
+
+.card--matched {
+	.card__back {
+		background-color: green;
+	}
+}
