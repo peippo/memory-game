@@ -1,8 +1,10 @@
 /*jshint esversion: 6 */
 
 const gameBoard = document.querySelector('.game-board');
-const cardSymbols = ['bomb', 'bolt', 'club', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'club', 'database', 'flask', 'gem', 'poo', 'gamepad'];
+const movesCounterElement = document.querySelector('.moves__counter');
+const cardSymbols = ['bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad'];
 let activeCards = [];
+let movesCounter = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -36,7 +38,7 @@ function createCards(amount = 16) {
 		cardFront.setAttribute('class', 'card__front');
 
 		// Debug info
-		cardFront.innerHTML = cardSymbols[i];
+		//cardFront.innerHTML = cardSymbols[i];
 
 		newCard.appendChild(cardFront);
 
@@ -69,18 +71,27 @@ function checkCardMatch() {
 			for (let card of activeCards) {
 				card.classList.add('card--matched');
 			}
-			setTimeout(clearActiveCards, 1000);
+			activeCards = [];
 		} else {
 			setTimeout(clearActiveCards, 1000);
 	}
+
+	updateMovesCounter();
 }
 
 function clearActiveCards() {
-	for (let card of activeCards) {
-		card.classList.remove('card--flipped');
-		card.addEventListener('click', flipCard);
+	if (activeCards.length > 1) {
+		for (let card of activeCards) {
+			card.classList.remove('card--flipped');
+			card.addEventListener('click', flipCard);
+		}
+		activeCards = [];
 	}
-	activeCards = [];
+}
+
+function updateMovesCounter() {
+	movesCounter += 1;
+	movesCounterElement.textContent = movesCounter;
 }
 
 shuffle(cardSymbols);

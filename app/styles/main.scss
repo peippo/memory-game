@@ -1,6 +1,9 @@
 // bower:scss
 // endbower
 
+$cyan: #2faf97;
+$yellow: #fde645;
+
 *, *:before, *:after {
 	box-sizing: border-box;
 }
@@ -14,15 +17,50 @@
 
 body {
 	background: #fafafa;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Barlow Condensed', sans-serif;
+	font-size: 16px;
 	color: #333;
+}
+
+header {
+	max-width: 800px;
+	margin: 50px auto 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.game-info {
+	display: flex;
+	align-items: flex-end;
+	font-size: 24px;
+	margin-bottom: 5px;
+}
+
+.moves {
+	margin-right: 1em;
+}
+
+.moves,
+.time {
+	color: $cyan;
+}
+
+.moves__counter,
+.time__counter {
+	color: #333;
+}
+
+h1 {
+	font-family: 'Bungee', sans-serif;
+	font-size: 48px;
+	color: $cyan;
 }
 
 .game-board {
 	display: flex;
 	flex-wrap: wrap;
-	max-width: 900px;
-	margin: 50px auto 0;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .card-wrapper {
@@ -59,21 +97,35 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	border-radius: 5px;
+	border-radius: 10px;
 	backface-visibility: hidden;
 }
 
 .card__front {
-	background-color: gray;
+	background-color: darken($yellow, 17%);
+
+	&:after {
+		content: '';
+		position: absolute;
+		width: calc(100% - 16px);
+		height: calc(100% - 16px);
+		top: 8px;
+		left: 8px;
+		border-radius: 8px;
+		background-color: $yellow;
+		background: linear-gradient(to top, darken($yellow, 12%), $yellow);
+		border-top: 1px solid rgba(white, 0.5);
+	}
 }
 
 .card__back {
 	background-color: lightgray;
+	box-shadow: 0 0 100px -10px rgba(black, 0.2) inset;
 	transform: rotateY( 180deg );
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: background-color, .3s;
+	transition: all, .3s;
 	transition-delay: 1s;
 }
 
@@ -87,6 +139,8 @@ body {
 }
 
 .card--matched {
+	pointer-events: none;
+
 	.card__back {
 		background-color: green;
 	}

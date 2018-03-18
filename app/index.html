@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="description" content="Memory Game for Udacity Front-End Web Developer Nanodegree">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Bungee|Barlow+Condensed" rel="stylesheet">
 		<script defer src="scripts/fa-solid.js"></script>
 		<script src="scripts/fontawesome.js"></script>
 		<title>Memory Game</title>
@@ -26,7 +27,13 @@
 			<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
-
+		<header>
+			<h1>Memory Game</h1>
+			<div class="game-info">
+				<div class="moves"><i class="fa fa-hand-rock"></i> MOVES: <span class="moves__counter">0</span></div>
+				<div class="time"><i class="fa fa-stopwatch"></i> TIMER: <span class="time__counter">00:00</span></div>
+			</div>
+		</header>
 		<div class="game-board"></div>
 
 		<!-- build:js scripts/vendor.js -->
