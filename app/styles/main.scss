@@ -86,6 +86,8 @@ h1 {
 
 	svg path {
 		fill: white;
+		transition: fill, .3s;
+		transition-delay: 1s;
 	}
 }
 
@@ -142,6 +144,40 @@ h1 {
 	pointer-events: none;
 
 	.card__back {
-		background-color: green;
+		background-color: $cyan;
+		box-shadow: 0 0 100px -10px rgba(darken($cyan, 20%), 0.2) inset;
 	}
+
+	.fa-heart path {
+		fill: #dc6c6c;
+	}
+
+	.fa-bolt path {
+		fill: #f9f94f;
+	}
+
+	.fa-database path {
+		fill: #1d6f6f;
+	}
+
+	.fa-gamepad path {
+		fill: #ec99e7;
+	}
+
+	.fa-gem path {
+		fill: #a0ffc5;
+	}
+
+	.fa-poo path {
+		fill: #945959;
+	}
+
+	.fa-bomb path {
+		fill: #3e3e3e;
+	}
+
+	.fa-flask path {
+		fill: #55f2ff;
+	}
+
 }
