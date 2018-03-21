@@ -52,6 +52,12 @@ header {
 .moves__counter,
 .time__counter {
 	color: #333;
+.moves__counter {
+	width: 30px;
+}
+
+.time__counter {
+	width: 50px;
 }
 
 h1 {
@@ -63,10 +69,11 @@ h1 {
 	&:after {
 		content: '.js';
 		position: absolute;
-		right: -40px;
-		bottom: 0;
+		right: -35px;
+		bottom: 3px;
+		font-size: 42px;
 		font-family: $base-font-family;
-		color: black;
+		color: white;
 	}
 
 	span[data-letter] {

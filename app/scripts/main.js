@@ -3,10 +3,12 @@
 const gameBoard = document.querySelector('.game-board');
 const movesCounterElement = document.querySelector('.moves__counter');
 const cardSymbols = ['bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad'];
-let logo = document.querySelector('.logo');
+const logo = document.querySelector('.logo');
+let gameTimer;
 let activeCards = [];
 let movesCounter = 0;
 let correctMatches = 0;
+let firstMove = true;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -58,6 +60,11 @@ function createCards(amount = 16) {
 }
 
 function flipCard() {
+	if (firstMove) {
+		gameTimer = setInterval(setTime, 1000);
+		firstMove = false;
+	}
+
 	if (activeCards.length < 2) {
 		activeCards.push(this);
 		this.classList.add('card--flipped');
@@ -76,6 +83,11 @@ function checkCardMatch() {
 			correctMatches += 1;
 			updateLogo();
 			activeCards = [];
+
+			if (correctMatches === 8) {
+				endGame();
+			}
+
 		} else {
 			setTimeout(clearActiveCards, 1000);
 	}
@@ -98,6 +110,16 @@ function updateMovesCounter() {
 	movesCounterElement.textContent = movesCounter;
 }
 
+function endGame() {
+	clearInterval(gameTimer);
+
+	setInterval(function() {
+		for (var i = 0; i < 3; i++) {
+			setTimeout(victoryAnimation, 1000);
+		}
+	}, 500);
+}
+
 function initializeLogo() {
 	const logoText = logo.textContent;
 	let splitLogo = '';
@@ -107,20 +129,11 @@ function initializeLogo() {
 	}
 
 	logo.innerHTML = splitLogo;
-	//logo = document.querySelector('.logo');
 }
 
 function updateLogo() {
 	let letterToUpdate = document.querySelector('[data-letter="' + correctMatches + '"]');
 	letterToUpdate.classList.add('active');
-
-	if (correctMatches === 8) {
-		setInterval(function() {
-			for (var i = 0; i < 3; i++) {
-				setTimeout(victoryAnimation, 1000);
-			}
-		}, 500);
-	}
 }
 
 function victoryAnimation() {
@@ -135,6 +148,28 @@ function flashLetters(i) {
 		letter.classList.toggle('active');
 	}, i * 300);
 }
+
+
+// Timer from stackoverflow, https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+const minutesLabel = document.getElementById('minutes');
+const secondsLabel = document.getElementById('seconds');
+let totalSeconds = 0;
+
+function setTime() {
+	++totalSeconds;
+	secondsLabel.innerHTML = pad(totalSeconds % 60);
+	minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
+function pad(val) {
+	var valString = val + '';
+	if (valString.length < 2) {
+		return '0' + valString;
+	} else {
+		return valString;
+	}
+}
+
 
 initializeLogo();
 shuffle(cardSymbols);
