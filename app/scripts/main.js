@@ -2,6 +2,7 @@
 
 const gameBoard = document.querySelector('.game-board');
 const movesCounterElement = document.querySelector('.moves__counter');
+const resetButton = document.querySelector('.reset-game');
 const cardSymbols = ['bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad'];
 const logo = document.querySelector('.logo');
 let gameTimer;
@@ -9,6 +10,8 @@ let activeCards = [];
 let movesCounter = 0;
 let correctMatches = 0;
 let firstMove = true;
+
+resetButton.addEventListener('click', resetGame);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -170,6 +173,21 @@ function pad(val) {
 	}
 }
 
+function resetGame() {
+	clearInterval(gameTimer);
+	totalSeconds = 0;
+	minutesLabel.textContent = '00';
+	secondsLabel.textContent = '00';
+	correctMatches = 0;
+	initializeLogo();
+	movesCounter = 0;
+	movesCounterElement.textContent = movesCounter;
+	firstMove = true;
+	activeCards = [];
+	gameBoard.innerHTML = '';
+	shuffle(cardSymbols);
+	createCards();
+}
 
 initializeLogo();
 shuffle(cardSymbols);

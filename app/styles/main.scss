@@ -28,6 +28,7 @@ body {
 	font-size: 16px;
 	color: #333;
 	padding: 20px;
+	text-align: center;
 }
 
 header {
@@ -48,6 +49,7 @@ header {
 .moves,
 .time {
 	color: $cyan;
+	text-align: left;
 }
 
 .moves__counter,
@@ -62,6 +64,23 @@ header {
 
 .time__counter {
 	width: 50px;
+}
+
+.reset-game {
+	background-color: #18151d;
+	color: white;
+	margin: 20px auto;
+	padding: 10px 20px;
+	border-radius: 5px;
+	display: inline-block;
+	font-size: 20px;
+	opacity: .6;
+	transition: opacity, .3s;
+
+	&:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
 }
 
 h1 {
