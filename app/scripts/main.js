@@ -3,8 +3,10 @@
 const gameBoard = document.querySelector('.game-board');
 const movesCounterElement = document.querySelector('.moves__counter');
 const cardSymbols = ['bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad'];
+let logo = document.querySelector('.logo');
 let activeCards = [];
 let movesCounter = 0;
+let correctMatches = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -71,6 +73,8 @@ function checkCardMatch() {
 			for (let card of activeCards) {
 				card.classList.add('card--matched');
 			}
+			correctMatches += 1;
+			updateLogo();
 			activeCards = [];
 		} else {
 			setTimeout(clearActiveCards, 1000);
@@ -94,5 +98,44 @@ function updateMovesCounter() {
 	movesCounterElement.textContent = movesCounter;
 }
 
+function initializeLogo() {
+	const logoText = logo.textContent;
+	let splitLogo = '';
+
+	for (let i = 0; i < logoText.length; i++) {
+		splitLogo += '<span data-letter="' + (i + 1) + '">' + logoText.charAt(i) + '</span>';
+	}
+
+	logo.innerHTML = splitLogo;
+	//logo = document.querySelector('.logo');
+}
+
+function updateLogo() {
+	let letterToUpdate = document.querySelector('[data-letter="' + correctMatches + '"]');
+	letterToUpdate.classList.add('active');
+
+	if (correctMatches === 8) {
+		setInterval(function() {
+			for (var i = 0; i < 3; i++) {
+				setTimeout(victoryAnimation, 1000);
+			}
+		}, 500);
+	}
+}
+
+function victoryAnimation() {
+	for (var i = 0; i < 8; i++) {
+		flashLetters(i);
+	}
+}
+
+function flashLetters(i) {
+	setTimeout(function() {
+		let letter = document.querySelector('[data-letter="' + (i + 1) + '"]');
+		letter.classList.toggle('active');
+	}, i * 300);
+}
+
+initializeLogo();
 shuffle(cardSymbols);
 createCards();

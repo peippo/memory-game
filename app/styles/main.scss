@@ -3,6 +3,8 @@
 
 $cyan: #2faf97;
 $yellow: #fde645;
+$base-font-family: 'Barlow Condensed', sans-serif;
+$heading-font-family: 'Bungee', sans-serif;
 
 *, *:before, *:after {
 	box-sizing: border-box;
@@ -17,14 +19,16 @@ $yellow: #fde645;
 
 body {
 	background: #fafafa;
-	font-family: 'Barlow Condensed', sans-serif;
+	font-family: $base-font-family;
 	font-size: 16px;
 	color: #333;
+	padding: 20px;
 }
 
 header {
-	max-width: 800px;
-	margin: 50px auto 0;
+	max-width: 700px;
+	margin: 0 auto;
+	padding-top: 50px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -51,15 +55,37 @@ header {
 }
 
 h1 {
-	font-family: 'Bungee', sans-serif;
+	font-family: $heading-font-family;
 	font-size: 48px;
 	color: $cyan;
+	position: relative;
+
+	&:after {
+		content: '.js';
+		position: absolute;
+		right: -40px;
+		bottom: 0;
+		font-family: $base-font-family;
+		color: black;
+	}
+
+	span[data-letter] {
+		text-shadow: 0;
+		transition: all, .5s;
+	}
+
+	span[data-letter].active {
+		color: $yellow;
+		text-shadow: 0 0 4px $cyan;
+	}
 }
+
+
 
 .game-board {
 	display: flex;
 	flex-wrap: wrap;
-	max-width: 800px;
+	max-width: 700px;
 	margin: 0 auto;
 }
 
