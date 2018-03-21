@@ -17,8 +17,13 @@ $heading-font-family: 'Bungee', sans-serif;
 	padding: 0.2em 0;
 }
 
+html {
+	height: 100%;
+}
+
 body {
-	background: #fafafa;
+	background: #0e2d31;
+	background: linear-gradient(-135deg, rgba(14, 45, 48, 0.85), rgba(69, 20, 67, 0.85)), linear-gradient(277deg, #57d967, rgba(20, 63, 69, 0.85)), linear-gradient(-73deg, #d95757, rgba(20, 63, 69, 0.85));
 	font-family: $base-font-family;
 	font-size: 16px;
 	color: #333;
@@ -40,10 +45,6 @@ header {
 	margin-bottom: 5px;
 }
 
-.moves {
-	margin-right: 1em;
-}
-
 .moves,
 .time {
 	color: $cyan;
@@ -51,7 +52,10 @@ header {
 
 .moves__counter,
 .time__counter {
-	color: #333;
+	color: white;
+	display: inline-block;
+}
+
 .moves__counter {
 	width: 30px;
 }
