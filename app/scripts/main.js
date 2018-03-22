@@ -134,11 +134,6 @@ function endGame() {
 
 function updateStarRating(moves) {
 	switch (moves) {
-		case 0:
-			starRatingElements[2].classList.remove('star--disabled');
-			starRatingElements[1].classList.remove('star--disabled');
-			starCount = 3;
-		break;
 		case 10:
 			starRatingElements[2].classList.add('star--disabled');
 			starCount = 2;
@@ -232,20 +227,7 @@ function pad(val) {
 }
 
 function resetGame() {
-	resetButton.classList.remove('active');
-	clearInterval(gameTimer);
-	totalSeconds = 0;
-	minutesLabel.textContent = '00';
-	secondsLabel.textContent = '00';
-	correctMatches = 0;
-	movesCounter = 0;
-	updateStarRating(movesCounter);
-	movesCounterElement.textContent = movesCounter;
-	firstMove = true;
-	activeCards = [];
-	gameBoard.innerHTML = '';
-	shuffle(cardSymbols);
-	createCards();
+	window.location.reload(false);
 }
 
 initializeLogo();
