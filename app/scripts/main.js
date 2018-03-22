@@ -36,6 +36,8 @@ function createCards(amount = 16) {
 		const newCardWrapper = document.createElement('div');
 		const newCard = document.createElement('div');
 		newCardWrapper.setAttribute('class', 'card-wrapper');
+		newCardWrapper.addEventListener('mousemove', addCardHoverEffect);
+		newCardWrapper.addEventListener('mouseout', removeCardHoverEffect);
 		newCardWrapper.appendChild(newCard);
 		newCard.setAttribute('class', 'card');
 		newCard.setAttribute('data-symbol', cardSymbols[i]);
@@ -70,9 +72,10 @@ function flipCard() {
 
 	if (activeCards.length < 2) {
 		activeCards.push(this);
-		this.classList.add('card--flipped');
+		animateCardFlip(this);
 		this.removeEventListener('click', flipCard);
 	}
+
 	if (activeCards.length === 2) {
 		checkCardMatch();
 	}
@@ -80,19 +83,19 @@ function flipCard() {
 
 function checkCardMatch() {
 	if (activeCards[0].getAttribute('data-symbol') === activeCards[1].getAttribute('data-symbol')) {
-			for (let card of activeCards) {
-				card.classList.add('card--matched');
-			}
-			correctMatches += 1;
-			updateLogo();
-			activeCards = [];
+		for (let card of activeCards) {
+			card.classList.add('card--matched');
+		}
+		correctMatches += 1;
+		updateLogo();
+		activeCards = [];
 
-			if (correctMatches === 8) {
-				endGame();
-			}
+		if (correctMatches === 8) {
+			endGame();
+		}
 
-		} else {
-			setTimeout(clearActiveCards, 1000);
+	} else {
+		setTimeout(clearActiveCards, 1000);
 	}
 
 	updateMovesCounter();
@@ -102,6 +105,8 @@ function clearActiveCards() {
 	if (activeCards.length > 1) {
 		for (let card of activeCards) {
 			card.classList.remove('card--flipped');
+			card.classList.remove('card--flipped-left');
+			card.classList.remove('card--flipped-right');
 			card.addEventListener('click', flipCard);
 		}
 		activeCards = [];
@@ -121,6 +126,37 @@ function endGame() {
 			setTimeout(victoryAnimation, 1000);
 		}
 	}, 500);
+}
+
+// Add CSS to flip card over, cards turning direction is based on which side of the card user is hovering over
+function animateCardFlip(card) {
+	if (card.classList.contains('card--hovering-left')) {
+		card.classList.add('card--flipped');
+		card.classList.add('card--flipped-left');
+	} else {
+		card.classList.add('card--flipped');
+		card.classList.add('card--flipped-right');
+	}
+}
+
+// Add CSS hover effect based on which side of the card user is hovering over
+function addCardHoverEffect(event) {
+	let elementWidth = (this.offsetWidth);
+	let firstHalf = elementWidth / 2;
+
+	if ((event.pageX - this.offsetLeft) < firstHalf) {
+		this.firstElementChild.classList.add('card--hovering-left');
+		this.firstElementChild.classList.remove('card--hovering-right');
+	} else {
+		this.firstElementChild.classList.add('card--hovering-right');
+		this.firstElementChild.classList.remove('card--hovering-left');
+	}
+}
+
+// Remove CSS hover effects from card
+function removeCardHoverEffect(event) {
+	this.firstElementChild.classList.remove('card--hovering-left');
+	this.firstElementChild.classList.remove('card--hovering-right');
 }
 
 function initializeLogo() {

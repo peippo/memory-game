@@ -137,13 +137,52 @@ h1 {
 
 	&:hover {
 		cursor: pointer;
-		transform: rotateY( 15deg );
 	}
 
 	svg path {
 		fill: white;
 		transition: fill, .3s;
 		transition-delay: 1s;
+	}
+
+	&:before,
+	&:after {
+		content: '';
+		height: 100%;
+		width: 50%;
+		position: absolute;
+		top: 0;
+		z-index: 5;
+		opacity: 0;
+		transition: opacity, .4s;
+	}
+
+	&:before {
+		left: 0;
+		border-radius: 10px 0 0 10px;
+		background: linear-gradient(to right, rgba(black, 0.2), transparent);
+	}
+
+	&:after {
+		right: 0;
+		border-radius: 0 10px 10px 0;
+		background: linear-gradient(to left, rgba(black, 0.2), transparent);
+	}
+}
+
+.card--hovering-left {
+	transform: rotateY( -15deg );
+
+	&:before {
+		opacity: 1;
+	}
+}
+
+.card--hovering-right {
+	transform: rotateY( 15deg );
+
+	&:after {
+		opacity: 1;
 	}
 }
 
@@ -187,12 +226,26 @@ h1 {
 	transition-delay: 1s;
 }
 
-.card--flipped,
-.card--matched {
+.card--flipped {
+	&:before,
+	&:after {
+		content: none;
+	}
+}
+
+.card--flipped-right {
 	transform: rotateY( 180deg );
 
 	&:hover {
 		transform: rotateY( 180deg );
+	}
+}
+
+.card--flipped-left {
+	transform: rotateY( -180deg );
+
+	&:hover {
+		transform: rotateY( -180deg );
 	}
 }
 
