@@ -139,6 +139,11 @@ h1 {
 	width: 50px;
 }
 
+.reset-game-button-wrapper  {
+	width: 100%;
+	float: left;
+}
+
 .reset-game-button {
 	background-color: #18151d;
 	color: white;
@@ -164,8 +169,6 @@ h1 {
 
 
 .game-board {
-	display: flex;
-	flex-wrap: wrap;
 	max-width: 700px;
 	margin: 0 auto;
 	transition: filter, .5s;
@@ -182,6 +185,7 @@ h1 {
 	padding-bottom: calc(25% - 10px);
 	margin: 5px;
 	perspective: 800px;
+	float: left;
 }
 
 .card {
@@ -206,24 +210,23 @@ h1 {
 	&:after {
 		content: '';
 		height: 100%;
-		width: 50%;
+		width: 100%;
 		position: absolute;
 		top: 0;
 		z-index: 5;
 		opacity: 0;
+		border-radius: 10px;
 		transition: opacity, .4s;
 	}
 
 	&:before {
 		left: 0;
-		border-radius: 10px 0 0 10px;
-		background: linear-gradient(to right, rgba(black, 0.2), transparent);
+		background: linear-gradient(to right, rgba(black, 0.2), transparent, rgba(white, 0.2));
 	}
 
 	&:after {
 		right: 0;
-		border-radius: 0 10px 10px 0;
-		background: linear-gradient(to left, rgba(black, 0.2), transparent);
+		background: linear-gradient(to left, rgba(black, 0.2), transparent, rgba(white, 0.2));
 	}
 }
 
@@ -281,6 +284,8 @@ h1 {
 		background-color: $yellow;
 		background: linear-gradient(to top, darken($yellow, 12%), $yellow);
 		border-top: 1px solid rgba(white, 0.5);
+		opacity: 1;
+		transition: opacity, .2s;
 	}
 }
 
@@ -299,6 +304,12 @@ h1 {
 	&:before,
 	&:after {
 		content: none;
+	}
+
+	// Hide card__front pseudoelement after card flip to fix Safari bug where it
+	// would occasionally still show on the cards back side, blocking the symbol
+	.card__front:after {
+		opacity: 0;
 	}
 }
 
