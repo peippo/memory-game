@@ -50,7 +50,6 @@ function createCards(amount = 16) {
 		// Create card frontside
 		const cardFront = document.createElement('figure');
 		cardFront.setAttribute('class', 'card__front');
-
 		newCard.appendChild(cardFront);
 
 		// Create card backside
@@ -66,6 +65,7 @@ function createCards(amount = 16) {
 	gameBoard.appendChild(fragment);
 }
 
+// Add card to active cards array on selection, if two cards are selected, check if they are a match
 function flipCard() {
 	if (firstMove) {
 		gameTimer = setInterval(setTime, 1000);
@@ -84,6 +84,7 @@ function flipCard() {
 	}
 }
 
+// Check for card match by comparing the symbol data-attribute
 function checkCardMatch() {
 	if (activeCards[0].getAttribute('data-symbol') === activeCards[1].getAttribute('data-symbol')) {
 		for (let card of activeCards) {
@@ -104,6 +105,7 @@ function checkCardMatch() {
 	updateMovesCounter();
 }
 
+// If no match was found, clear active cards array, remove flipped state styles and add the flip card event listener back
 function clearActiveCards() {
 	if (activeCards.length > 1) {
 		for (let card of activeCards) {
@@ -116,12 +118,14 @@ function clearActiveCards() {
 	}
 }
 
+// Update the moves count and update star rating based on current moves count
 function updateMovesCounter() {
 	movesCounter += 1;
 	movesCounterElement.textContent = movesCounter;
 	updateStarRating(movesCounter);
 }
 
+// Stop the timer, start the victory animation and show congratulations popup
 function endGame() {
 	clearInterval(gameTimer);
 	showEndScreen();
@@ -133,6 +137,7 @@ function endGame() {
 	}, 500);
 }
 
+// Update star rating based on moves count
 function updateStarRating(moves) {
 	switch (moves) {
 		case 10:
@@ -146,6 +151,8 @@ function updateStarRating(moves) {
 	}
 }
 
+// Update & make congratulations popup visible
+// Stars & timer are copied from in-game display, the message is set based on current star rating
 function showEndScreen() {
 	const endScreenMessage = endScreenElement.querySelector('.end-screen__message');
 	const endScreenStars = endScreenElement.querySelector('.end-screen__stars');
@@ -205,6 +212,8 @@ function removeCardHoverEffect(event) {
 	this.firstElementChild.classList.remove('card--hovering-right');
 }
 
+// Split logo texts letters to separate elements
+// For displaying correct matches count & victory animation
 function initializeLogo() {
 	const logoText = logo.textContent;
 	let splitLogo = '';
@@ -216,11 +225,13 @@ function initializeLogo() {
 	logo.innerHTML = splitLogo;
 }
 
+// Highlight a logo letter when a correct match is made
 function updateLogo() {
 	let letterToUpdate = document.querySelector('[data-letter="' + correctMatches + '"]');
 	letterToUpdate.classList.add('active');
 }
 
+// Victory animation loops through all logo letters toggling a class on/off
 function victoryAnimation() {
 	for (let i = 0; i < 8; i++) {
 		flashLetters(i);
