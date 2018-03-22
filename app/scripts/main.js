@@ -5,7 +5,10 @@ const movesCounterElement = document.querySelector('.moves__counter');
 const resetButton = document.querySelector('.reset-game-button');
 const cardSymbols = ['bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad'];
 const logo = document.querySelector('.logo');
+const timeCounterContainerElement = document.querySelector('.time__counter');
+const starRatingContainerElement = document.querySelector('.stars');
 const starRatingElements = document.getElementsByClassName('star');
+const endScreenElement = document.querySelector('.end-screen');
 let gameTimer;
 let starCount = 3;
 let activeCards = [];
@@ -47,9 +50,6 @@ function createCards(amount = 16) {
 		// Create card frontside
 		const cardFront = document.createElement('figure');
 		cardFront.setAttribute('class', 'card__front');
-
-		// Debug info
-		//cardFront.innerHTML = cardSymbols[i];
 
 		newCard.appendChild(cardFront);
 
@@ -124,6 +124,7 @@ function updateMovesCounter() {
 
 function endGame() {
 	clearInterval(gameTimer);
+	showEndScreen();
 
 	setInterval(function() {
 		for (let i = 0; i < 3; i++) {
@@ -143,6 +144,34 @@ function updateStarRating(moves) {
 			starCount = 1;
 		break;
 	}
+}
+
+function showEndScreen() {
+	const endScreenMessage = endScreenElement.querySelector('.end-screen__message');
+	const endScreenStars = endScreenElement.querySelector('.end-screen__stars');
+	const endScreenTimer = endScreenElement.querySelector('.end-screen__timer');
+
+	switch (starCount) {
+		case 3:
+			endScreenMessage.textContent = 'Awesome job, you did great!';
+		break;
+		case 2:
+			endScreenMessage.textContent = 'Good work, keep training!';
+		break;
+		case 1:
+			endScreenMessage.textContent = 'Nice, but you can do better!';
+		break;
+	}
+
+	if (totalSeconds < 10) {
+		endScreenMessage.textContent = 'Wait a minute, did you cheat?';
+	}
+
+	endScreenStars.innerHTML = starRatingContainerElement.innerHTML;
+	endScreenTimer.innerHTML = timeCounterContainerElement.innerHTML;
+
+	gameBoard.classList.add('game-board--blurred');
+	endScreenElement.classList.add('end-screen--active');
 }
 
 // Add CSS to flip card over, cards turning direction is based on which side of the card user is hovering over

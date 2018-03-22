@@ -40,6 +40,7 @@ header {
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
+	user-select: none;
 
 	@media only screen and (min-width : 640px) {
 		flex-direction: row;
@@ -167,6 +168,12 @@ h1 {
 	flex-wrap: wrap;
 	max-width: 700px;
 	margin: 0 auto;
+	transition: filter, .5s;
+}
+
+.game-board--blurred {
+	filter: blur(15px);
+	pointer-events: none;
 }
 
 .card-wrapper {
@@ -351,4 +358,69 @@ h1 {
 		fill: #55f2ff;
 	}
 
+}
+
+.end-screen {
+	width: 80%;
+	max-width: 500px;
+	padding: 30px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 20px;
+	position: absolute;
+	z-index: 10;
+	top: -250px;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: top, .5s;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	@media only screen and (min-width : 640px) {
+		padding: 40px;
+	}
+}
+
+.end-screen--active {
+	top: 150px;
+
+	@media only screen and (min-width : 640px) {
+		top: 200px;
+	}
+}
+
+.end-screen__message {
+	font-family: $heading-font-family;
+	font-size: 28px;
+	color: darken($cyan, 20%);
+
+	@media only screen and (min-width : 640px) {
+		font-size: 36px;
+	}
+}
+
+.end-screen__stats {
+	display: flex;
+	justify-content: space-around;
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 15px;
+	margin-top: 30px;
+	border-radius: 10px;
+}
+
+.end-screen__stars,
+.end-screen__timer {
+	font-size: 24px;
+	color: $cyan;
+
+	@media only screen and (min-width : 640px) {
+		font-size: 32px;
+	}
+}
+
+.end-screen__stars {
+
+	.star--disabled {
+		opacity: .2;
+	}
 }
