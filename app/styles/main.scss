@@ -97,6 +97,10 @@ h1 {
 	}
 }
 
+.star--disabled {
+	opacity: .1;
+}
+
 .game-info {
 	display: flex;
 	align-items: flex-end;

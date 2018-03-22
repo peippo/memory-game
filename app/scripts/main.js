@@ -5,7 +5,9 @@ const movesCounterElement = document.querySelector('.moves__counter');
 const resetButton = document.querySelector('.reset-game-button');
 const cardSymbols = ['bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad'];
 const logo = document.querySelector('.logo');
+const starRatingElements = document.getElementsByClassName('star');
 let gameTimer;
+let starCount = 3;
 let activeCards = [];
 let movesCounter = 0;
 let correctMatches = 0;
@@ -117,6 +119,7 @@ function clearActiveCards() {
 function updateMovesCounter() {
 	movesCounter += 1;
 	movesCounterElement.textContent = movesCounter;
+	updateStarRating(movesCounter);
 }
 
 function endGame() {
@@ -127,6 +130,24 @@ function endGame() {
 			setTimeout(victoryAnimation, 1000);
 		}
 	}, 500);
+}
+
+function updateStarRating(moves) {
+	switch (moves) {
+		case 0:
+			starRatingElements[2].classList.remove('star--disabled');
+			starRatingElements[1].classList.remove('star--disabled');
+			starCount = 3;
+		break;
+		case 10:
+			starRatingElements[2].classList.add('star--disabled');
+			starCount = 2;
+		break;
+		case 15:
+			starRatingElements[1].classList.add('star--disabled');
+			starCount = 1;
+		break;
+	}
 }
 
 // Add CSS to flip card over, cards turning direction is based on which side of the card user is hovering over
@@ -218,6 +239,7 @@ function resetGame() {
 	secondsLabel.textContent = '00';
 	correctMatches = 0;
 	movesCounter = 0;
+	updateStarRating(movesCounter);
 	movesCounterElement.textContent = movesCounter;
 	firstMove = true;
 	activeCards = [];
