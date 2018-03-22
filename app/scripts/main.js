@@ -54,7 +54,7 @@ function createCards(amount = 16) {
 		// Create card backside
 		const cardBack = document.createElement('figure');
 		cardBack.setAttribute('class', 'card__back');
-		cardBack.innerHTML = '<i class="fas fa-4x fa-' + cardSymbols[i] + '"></i>';
+		cardBack.innerHTML = '<i class="card__symbol fas fa-' + cardSymbols[i] + '"></i>';
 		newCard.appendChild(cardBack);
 
 		newCard.addEventListener('click', flipCard);

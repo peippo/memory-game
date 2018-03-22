@@ -34,9 +34,67 @@ body {
 header {
 	max-width: 700px;
 	margin: 0 auto;
-	padding-top: 50px;
+	padding-top: 25px;
 	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
 	justify-content: space-between;
+	position: relative;
+
+	@media only screen and (min-width : 640px) {
+		flex-direction: row;
+	}
+}
+
+h1 {
+	font-family: $heading-font-family;
+	font-size: 38px;
+	color: $cyan;
+	position: relative;
+	text-align: left;
+	order: 0;
+
+	&:after {
+		content: '.js';
+		position: absolute;
+		bottom: 3px;
+		font-size: 42px;
+		font-family: $base-font-family;
+		color: white;
+	}
+
+	span[data-letter] {
+		text-shadow: 0;
+		transition: all, .5s;
+	}
+
+	span[data-letter].active {
+		color: $yellow;
+		text-shadow: 0 0 4px $cyan;
+	}
+
+	@media only screen and (min-width : 420px) {
+		font-size: 46px;
+	}
+
+	@media only screen and (min-width : 640px) {
+		font-size: 52px;
+		order: 2;
+	}
+}
+
+.stars {
+	font-size: 24px;
+	color: $yellow;
+	margin-bottom: -23px;
+	order: 1;
+	text-align: right;
+
+	@media only screen and (min-width : 640px) {
+		font-size: 32px;
+		margin-bottom: 0;
+		width: 100%;
+	}
 }
 
 .game-info {
@@ -44,12 +102,22 @@ header {
 	align-items: flex-end;
 	font-size: 24px;
 	margin-bottom: 5px;
+	order: 2;
 }
 
 .moves,
 .time {
 	color: $cyan;
 	text-align: left;
+}
+
+.moves__text,
+.time__text {
+	display: none;
+
+	@media only screen and (min-width : 420px) {
+		display: inline-block;
+	}
 }
 
 .moves__counter,
@@ -82,34 +150,6 @@ header {
 		cursor: pointer;
 	}
 }
-
-h1 {
-	font-family: $heading-font-family;
-	font-size: 48px;
-	color: $cyan;
-	position: relative;
-
-	&:after {
-		content: '.js';
-		position: absolute;
-		right: -35px;
-		bottom: 3px;
-		font-size: 42px;
-		font-family: $base-font-family;
-		color: white;
-	}
-
-	span[data-letter] {
-		text-shadow: 0;
-		transition: all, .5s;
-	}
-
-	span[data-letter].active {
-		color: $yellow;
-		text-shadow: 0 0 4px $cyan;
-	}
-}
-
 
 
 .game-board {
@@ -183,6 +223,18 @@ h1 {
 
 	&:after {
 		opacity: 1;
+	}
+}
+
+.card__symbol {
+	font-size: 32px;
+
+	@media only screen and (min-width : 420px) {
+		font-size: 48px;
+	}
+
+	@media only screen and (min-width : 640px) {
+		font-size: 72px;
 	}
 }
 
