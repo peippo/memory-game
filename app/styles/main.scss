@@ -134,7 +134,7 @@ h1 {
 	width: 50px;
 }
 
-.reset-game {
+.reset-game-button {
 	background-color: #18151d;
 	color: white;
 	margin: 20px auto;
@@ -142,12 +142,18 @@ h1 {
 	border-radius: 5px;
 	display: inline-block;
 	font-size: 20px;
-	opacity: .6;
+	opacity: 0;
+	pointer-events: none;
 	transition: opacity, .3s;
 
-	&:hover {
-		opacity: 1;
-		cursor: pointer;
+	&.active {
+		opacity: .6;
+		pointer-events: auto;
+
+		&:hover {
+			opacity: 1;
+			cursor: pointer;
+		}
 	}
 }
 

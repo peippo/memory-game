@@ -2,7 +2,7 @@
 
 const gameBoard = document.querySelector('.game-board');
 const movesCounterElement = document.querySelector('.moves__counter');
-const resetButton = document.querySelector('.reset-game');
+const resetButton = document.querySelector('.reset-game-button');
 const cardSymbols = ['bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad', 'bomb', 'bolt', 'heart', 'database', 'flask', 'gem', 'poo', 'gamepad'];
 const logo = document.querySelector('.logo');
 let gameTimer;
@@ -68,6 +68,7 @@ function flipCard() {
 	if (firstMove) {
 		gameTimer = setInterval(setTime, 1000);
 		firstMove = false;
+		resetButton.classList.add('active');
 	}
 
 	if (activeCards.length < 2) {
@@ -210,12 +211,12 @@ function pad(val) {
 }
 
 function resetGame() {
+	resetButton.classList.remove('active');
 	clearInterval(gameTimer);
 	totalSeconds = 0;
 	minutesLabel.textContent = '00';
 	secondsLabel.textContent = '00';
 	correctMatches = 0;
-	initializeLogo();
 	movesCounter = 0;
 	movesCounterElement.textContent = movesCounter;
 	firstMove = true;
