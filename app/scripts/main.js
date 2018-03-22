@@ -31,7 +31,7 @@ function shuffle(array) {
 function createCards(amount = 16) {
 	const fragment = document.createDocumentFragment();
 
-	for (var i = 0; i < amount; i++) {
+	for (let i = 0; i < amount; i++) {
 		// Create card element & card wrapper element
 		const newCardWrapper = document.createElement('div');
 		const newCard = document.createElement('div');
@@ -122,7 +122,7 @@ function endGame() {
 	clearInterval(gameTimer);
 
 	setInterval(function() {
-		for (var i = 0; i < 3; i++) {
+		for (let i = 0; i < 3; i++) {
 			setTimeout(victoryAnimation, 1000);
 		}
 	}, 500);
@@ -176,7 +176,7 @@ function updateLogo() {
 }
 
 function victoryAnimation() {
-	for (var i = 0; i < 8; i++) {
+	for (let i = 0; i < 8; i++) {
 		flashLetters(i);
 	}
 }
@@ -201,7 +201,7 @@ function setTime() {
 }
 
 function pad(val) {
-	var valString = val + '';
+	let valString = val + '';
 	if (valString.length < 2) {
 		return '0' + valString;
 	} else {
