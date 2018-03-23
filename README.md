@@ -10,6 +10,7 @@ Moves counter does not keep track of moves properly if the cards are clicked rap
 
 ## Installation
 Want to run it locally?
+You need to have [Node.js](https://nodejs.org/en/), [NPM](https://www.npmjs.com/get-npm) and [Bower](https://bower.io/#install-bower) installed. If you do, just run the following commands in the project directory:
 ```
 npm install
 bower install
