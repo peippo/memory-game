@@ -80,6 +80,7 @@ function flipCard() {
 	}
 
 	if (activeCards.length === 2) {
+		gameBoard.classList.add('game-board--disabled');
 		checkCardMatch();
 	}
 }
@@ -103,6 +104,10 @@ function checkCardMatch() {
 	}
 
 	updateMovesCounter();
+
+	setTimeout(function() {
+		gameBoard.classList.remove('game-board--disabled');
+	}, 1000);
 }
 
 // If no match was found, clear active cards array, remove flipped state styles and add the flip card event listener back

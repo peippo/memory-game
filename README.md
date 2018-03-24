@@ -5,9 +5,6 @@
 Memory game project for Udacity Front-End Web Developer Nanodegree.
 [Project specification on Udacity](https://review.udacity.com/#!/rubrics/591/view)
 
-## Known issues
-Moves counter does not keep track of moves properly if the cards are clicked rapidly in succession.
-
 ## Installation
 Want to run it locally?
 You need to have [Node.js](https://nodejs.org/en/), [NPM](https://www.npmjs.com/get-npm) and [Bower](https://bower.io/#install-bower) installed. If you do, just run the following commands in the project directory:
