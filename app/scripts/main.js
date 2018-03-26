@@ -55,7 +55,7 @@ function createCards(amount = 16) {
 		// Create card backside
 		const cardBack = document.createElement('figure');
 		cardBack.setAttribute('class', 'card__back');
-		cardBack.innerHTML = '<i class="card__symbol fas fa-' + cardSymbols[i] + '"></i>';
+		cardBack.innerHTML = `<i class="card__symbol fas fa-${cardSymbols[i]}"></i>`;
 		newCard.appendChild(cardBack);
 
 		newCard.addEventListener('click', flipCard);
@@ -224,7 +224,7 @@ function initializeLogo() {
 	let splitLogo = '';
 
 	for (let i = 0; i < logoText.length; i++) {
-		splitLogo += '<span data-letter="' + (i + 1) + '">' + logoText.charAt(i) + '</span>';
+		splitLogo += `<span data-letter="${i + 1}">${logoText.charAt(i)}</span>`;
 	}
 
 	logo.innerHTML = splitLogo;
@@ -232,7 +232,7 @@ function initializeLogo() {
 
 // Highlight a logo letter when a correct match is made
 function updateLogo() {
-	let letterToUpdate = document.querySelector('[data-letter="' + correctMatches + '"]');
+	let letterToUpdate = document.querySelector(`[data-letter="${correctMatches}"]`);
 	letterToUpdate.classList.add('active');
 }
 
@@ -245,7 +245,7 @@ function victoryAnimation() {
 
 function flashLetters(i) {
 	setTimeout(function() {
-		let letter = document.querySelector('[data-letter="' + (i + 1) + '"]');
+		let letter = document.querySelector(`[data-letter="${i + 1}"]`);
 		letter.classList.toggle('active');
 	}, i * 300);
 }
